@@ -1,5 +1,22 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
-<app-log-item *ngFor="let logItem of logItems"
-              [logItem]="logItem">
-</app-log-item>
+<pagination-controls class="ui pagination menu center aligned"
+                     id="log"
+                     (pageChange)="p =$event"
+                     maxSize="25"
+                     directionLinks="true"
+                     autoHide="true"
+                     previousLabel="Previous"
+                     nextLabel="Next"
+                     screenReaderPaginationLabel="Pagination"
+                     screenReaderPageLabel="page"
+                     screenReaderCurrentLabel="You're on page">
 
+</pagination-controls>
+<div class="ui segment">
+  <div class="ui five cards">
+    <app-log-item *ngFor="let logItem of logItems
+                          | paginate: { itemsPerPage: 20, currentPage: p, id: 'log' }"
+                  [logItem]="logItem">
+    </app-log-item>
+  </div>
+</div>

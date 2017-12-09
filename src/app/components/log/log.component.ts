@@ -3,6 +3,8 @@ import {LogItem} from "./log-item/log-item.model";
 import {LogService} from "../../services/log.service";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
+declare var $;
+
 @Component({
   selector: 'app-log',
   templateUrl: './log.component.html',
@@ -10,7 +12,7 @@ import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 })
 export class LogComponent implements OnInit, AfterViewInit {
 
-  @HostBinding('attr.class') cssClass = 'ui five cards';
+  @HostBinding('attr.class') cssClass = 'ui container';
   logItems: LogItem[];
   numberOfPages: number;
   loading: boolean = false;
@@ -37,6 +39,10 @@ export class LogComponent implements OnInit, AfterViewInit {
         this.numberOfPages = results.length;
         this.logItems = results;
       })
+  }
+
+  pageChanged(page: number){
+    $('.tabular.menu .item').tab();
   }
 
 }

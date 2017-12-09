@@ -6,19 +6,22 @@ import { LogComponent } from './components/log/log.component';
 import { LogItemComponent } from './components/log/log-item/log-item.component';
 import {LogService} from "./services/log.service";
 import {HttpClientModule} from "@angular/common/http";
-import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 import {LoadingModule} from "ngx-loading";
+import {NgxPaginationModule} from "ngx-pagination";
+import { PaginationControllerComponent } from './components/pagination-controller/pagination-controller.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogComponent,
-    LogItemComponent
+    LogItemComponent,
+    PaginationControllerComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    LoadingModule
+    LoadingModule,
+    NgxPaginationModule
   ],
   providers: [LogService],
   bootstrap: [AppComponent]
