@@ -1,0 +1,14 @@
+.value{
+  font-size: 125%;
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.ui.sub.header{
+  margin-top: 0px ;
+  margin-bottom: 5px;
+}
+
+.content{
+  font-size: 60% !important;
+}
