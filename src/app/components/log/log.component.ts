@@ -2,6 +2,7 @@ import {AfterViewChecked, AfterViewInit, Component, HostBinding, OnInit} from '@
 import {LogItem} from "./log-item/log-item.model";
 import {LogService} from "../../services/log.service";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
+import {PaginationInstance} from "ngx-pagination";
 
 declare var $;
 
@@ -17,6 +18,12 @@ export class LogComponent implements OnInit, AfterViewInit {
   numberOfPages: number;
   loading: boolean = false;
 
+  public config: PaginationInstance = {
+    id: 'log',
+    itemsPerPage: 20,
+    currentPage: 1
+  };
+
   constructor(private logService: LogService) {
 
   }
@@ -26,7 +33,7 @@ export class LogComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     let date = new Date();
     let actualDateString = date.getMonth()+"/"+date.getDay()+"/"+date.getFullYear();
-    this.search(actualDateString, actualDateString, "FL")
+    this.search(actualDateString, actualDateString, "OH")
 
   }
 

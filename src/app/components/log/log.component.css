@@ -1,0 +1,7 @@
+.item{
+  cursor: default;
+}
+
+.item:hover{
+  cursor: pointer;
+}
