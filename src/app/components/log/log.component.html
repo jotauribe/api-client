@@ -1,4 +1,10 @@
+<!-- SPINNER (LOADING INDICATOR) -->
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
+
+<!-- FILTER MENU -->
+<app-filter-form (onStatePicked)="filterByState($event)"></app-filter-form>
+
+<!-- PAGINATION -->
 <pagination-template class="ui mini borderless pagination menu"
                      [id]="config.id"
                      #p="paginationApi"
@@ -22,6 +28,8 @@
   </div>
 
 </pagination-template>
+
+<!-- CONTENT -->
 <div class="ui segment">
   <div class="ui five cards">
     <app-log-item *ngFor="let logItem of logItems

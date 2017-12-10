@@ -9,19 +9,26 @@ import {HttpClientModule} from "@angular/common/http";
 import {LoadingModule} from "ngx-loading";
 import {NgxPaginationModule} from "ngx-pagination";
 import { HeaderComponent } from './components/header/header.component';
-
+import { FilterFormComponent } from './components/log/filter-form/filter-form.component';
+import { DropdownDirective } from './directives/dropdown.directive';
+import { CalendarDirective } from './directives/calendar.directive';
 @NgModule({
   declarations: [
     AppComponent,
     LogComponent,
     LogItemComponent,
-    HeaderComponent
+    HeaderComponent,
+    FilterFormComponent,
+    DropdownDirective,
+    CalendarDirective
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     LoadingModule,
     NgxPaginationModule
+
+
   ],
   providers: [LogService],
   bootstrap: [AppComponent]

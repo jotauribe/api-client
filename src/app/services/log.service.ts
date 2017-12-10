@@ -16,7 +16,7 @@ export class LogService {
     if (startDate) p = p.append('startdate', startDate)
     if (endDate) p =  p.append('enddate', endDate)
     if (stateCode) p = p.append('state', stateCode)
-    console.log(p.toString());
+    console.log("Lo que estamos buscando: "+p.toString());
     return this.httpClient.get<LogItem[]>(this.url, {params: p})
   }
 

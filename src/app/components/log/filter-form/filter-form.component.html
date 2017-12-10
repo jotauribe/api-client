@@ -1,0 +1,40 @@
+<div class="ui five column grid">
+  <div class="row">
+    <div class="column">
+      <div class="ui labeled input calendar">
+        <div class="ui label">
+          From:
+        </div>
+        <div class="ui input left icon">
+          <i class="calendar icon"></i>
+          <input type="text" placeholder="Start Date" [value]="startDate">
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="ui labeled input calendar" >
+        <div class="ui label">
+          To:
+        </div>
+        <div class="ui input left icon">
+          <i class="calendar icon"></i>
+          <input type="text" placeholder="End date" [value]="endDate" (change)="pickStartDate()">
+        </div>
+      </div>
+    </div>
+    <div class="right floated column">
+      <div class="ui selection dropdown" #select (change)="pickState($event.target.value)">
+        <input name="STATE" type="hidden">
+        <i class="filter icon"></i>
+        <div class="default text">Filter by state</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item" data-value="FL">FL</div>
+          <div class="item" data-value="GA">GA</div>
+          <div class="item" data-value="OH">OH</div>
+          <div class="item" data-value="LA">LA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

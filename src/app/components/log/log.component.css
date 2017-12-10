@@ -5,3 +5,8 @@
 .item:hover{
   cursor: pointer;
 }
+
+app-filter-form {
+  padding-bottom: 12px;
+
+}
