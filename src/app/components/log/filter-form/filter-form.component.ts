@@ -29,12 +29,12 @@ export class FilterFormComponent implements OnInit{
   }
 
   pickStartDate(startDate: Date): void{
-    console.log("HOLA")
+    console.log("START DATE: " + startDate)
     this.onStartDatePicked.emit(startDate)
   }
 
   pickEndDate(endDate: Date): void{
-    console.log("HOLA")
+    console.log("END DATE: " + this.endDate)
     this.onEndDatePicked.emit(endDate)
   }
 

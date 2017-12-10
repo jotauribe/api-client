@@ -64,4 +64,19 @@ export class LogComponent implements OnInit, AfterViewInit {
     this.search(this.searchParams['start_date'], this.searchParams['end_date'], state);
   }
 
+  filterByStartDate(startDate: Date){
+    console.log("Start date: " + startDate);
+    this.search(this.dateToString(startDate), this.searchParams['end_date'], this.searchParams['state_code']);
+  }
+
+  filterByEndDate(endDate: Date){
+    console.log("End date: " + endDate);
+    this.search(this.searchParams['start_date'], this.dateToString(endDate), this.searchParams['state_code']);
+  }
+
+  dateToString(date: Date): string{
+    const dateString = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+    return dateString;
+  }
+
 }

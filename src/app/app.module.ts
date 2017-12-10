@@ -12,6 +12,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FilterFormComponent } from './components/log/filter-form/filter-form.component';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { CalendarDirective } from './directives/calendar.directive';
+import { CalendarComponent } from './components/calendar/calendar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { CalendarDirective } from './directives/calendar.directive';
     HeaderComponent,
     FilterFormComponent,
     DropdownDirective,
-    CalendarDirective
+    CalendarDirective,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
