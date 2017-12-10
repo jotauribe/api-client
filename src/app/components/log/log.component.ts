@@ -32,8 +32,9 @@ export class LogComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     let date = new Date();
-    let actualDateString = date.getMonth()+"/"+date.getDay()+"/"+date.getFullYear();
-    this.search(actualDateString, actualDateString, "OH")
+    console.log("date: "+ date);
+    let actualDateString = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+    this.search(actualDateString, actualDateString, "FL")
 
   }
 

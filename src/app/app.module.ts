@@ -8,14 +8,14 @@ import {LogService} from "./services/log.service";
 import {HttpClientModule} from "@angular/common/http";
 import {LoadingModule} from "ngx-loading";
 import {NgxPaginationModule} from "ngx-pagination";
-import { PaginationControllerComponent } from './components/pagination-controller/pagination-controller.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogComponent,
     LogItemComponent,
-    PaginationControllerComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
