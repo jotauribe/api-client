@@ -27,6 +27,7 @@ export class CalendarComponent implements AfterViewInit, ControlValueAccessor {
               @Self() private self: NgModel){
     this.self.valueAccessor = this;
     this.selectedDate = new Date;
+    this.initialDate = new Date;
   }
   ngAfterViewInit(): void {
     this.settings.onChange = (date: Date) => {
@@ -41,7 +42,6 @@ export class CalendarComponent implements AfterViewInit, ControlValueAccessor {
     if (value === this.selectedDate) {
       return;
     }
-    console.log('Hola')
     this.self.viewToModelUpdate(value);
     this.change.emit(value);
     this.selectedDate = value;

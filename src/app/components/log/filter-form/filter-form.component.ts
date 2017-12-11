@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostBinding, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, OnInit, Output} from '@angular/core';
 
 declare var $: any;
 
@@ -7,7 +7,7 @@ declare var $: any;
   templateUrl: './filter-form.component.html',
   styleUrls: ['./filter-form.component.css']
 })
-export class FilterFormComponent implements OnInit{
+export class FilterFormComponent implements OnInit, AfterViewInit{
 
   @HostBinding('attr.class') cssClass = 'ui container';
   @Output() onStatePicked: EventEmitter<string> = new EventEmitter<string>();
@@ -23,7 +23,13 @@ export class FilterFormComponent implements OnInit{
     this.endDate = new Date();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
+
+  ngAfterViewInit(): void {
+    $('#order').dropdown({'set selected': 'pro_cde'})
+  }
 
   pickState(stateCode: string): void{
     this.onStatePicked.emit(stateCode);
