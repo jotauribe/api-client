@@ -3,6 +3,7 @@
 
 <!-- FILTER MENU -->
 <app-filter-form (onStatePicked)="filterByState($event)"
+                 (onOrderCriteriaPicked)="orderByCriteria($event)"
                  (onStartDatePicked)="filterByStartDate($event)"
                  (onEndDatePicked)="filterByEndDate($event)">
 

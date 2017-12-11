@@ -8,7 +8,7 @@ declare var $: any;
     <div class="ui calendar">
       <div class="ui input left icon">
         <i class="calendar icon"></i>
-        <input type="text" placeholder="Click to select Date/Time" [value]="initialDate">
+        <input type="text" placeholder="Click to select date" [value]="initialDate">
       </div>
     </div>
   `,
@@ -23,8 +23,10 @@ export class CalendarComponent implements AfterViewInit, ControlValueAccessor {
   public onChange: any = Function.prototype;
   public onTouched: any = Function.prototype;
   private selectedDate: Date;
-  constructor(private parentElement: ElementRef, @Self() private self: NgModel){
+  constructor(private parentElement: ElementRef,
+              @Self() private self: NgModel){
     this.self.valueAccessor = this;
+    this.selectedDate = new Date;
   }
   ngAfterViewInit(): void {
     this.settings.onChange = (date: Date) => {

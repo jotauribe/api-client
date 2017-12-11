@@ -74,6 +74,17 @@ export class LogComponent implements OnInit, AfterViewInit {
     this.search(this.searchParams['start_date'], this.dateToString(endDate), this.searchParams['state_code']);
   }
 
+  orderByCriteria(criteria: string): void {
+    console.log("Criteria: " + criteria);
+    if(this.logItems.length > 0){
+      if(typeof this.logItems[0][criteria] === 'string')
+        this.logItems.sort(function(a,b) {return (a[criteria] > b[criteria]) ? 1 : ((b[criteria] > a[criteria]) ? -1 : 0);} );
+      if(typeof this.logItems[0][criteria] === 'number')
+        this.logItems.sort(function(a, b){return a[criteria]-b[criteria]});
+    }
+
+  }
+
   dateToString(date: Date): string{
     const dateString = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
     return dateString;

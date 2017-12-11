@@ -11,6 +11,7 @@ export class FilterFormComponent implements OnInit{
 
   @HostBinding('attr.class') cssClass = 'ui container';
   @Output() onStatePicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onOrderCriteriaPicked: EventEmitter<string> = new EventEmitter<string>();
   @Output() onStartDatePicked: EventEmitter<Date> = new EventEmitter<Date>();
   @Output() onEndDatePicked: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -34,8 +35,13 @@ export class FilterFormComponent implements OnInit{
   }
 
   pickEndDate(endDate: Date): void{
-    console.log("END DATE: " + this.endDate)
+    console.log("END DATE: " + endDate)
     this.onEndDatePicked.emit(endDate)
+  }
+
+  pickOrderCriteria(criteria: string): void{
+    console.log("CRITERIA: " + criteria)
+    this.onOrderCriteriaPicked.emit(criteria)
   }
 
 }
