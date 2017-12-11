@@ -3,6 +3,7 @@ import {LogItem} from "./log-item/log-item.model";
 import {LogService} from "../../services/log.service";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 import {PaginationInstance} from "ngx-pagination";
+import { Chart } from 'chart.js';
 
 declare var $;
 
@@ -15,6 +16,31 @@ export class LogComponent implements OnInit, AfterViewInit {
 
   @HostBinding('attr.class') cssClass = 'ui container';
   logItems: LogItem[];
+  requestPerMachineData : any[] = [
+    {data: [0, 0, 0, 0], label: 'Machines'}
+  ];
+  requestPerMachineLabels: string[] =  ["JAX02", "BDU02", "JAX01", "BDU01"];
+
+  requestPerComplianceStatusData: any[] = [
+    {data: [0, 0, 0, 0], label: 'Compliance Status'}
+  ];
+
+  requestPerComplianceStatusLabels: string[] =  ["IN_PROG", "COMPL", "NOT_FOUND"];
+
+  averageTimeChartData: any[] = [
+    {data: [0, 0, 0, 0], label: 'Average time per day'}
+  ];
+
+  responseTimes: number[] = [];
+
+  averageTimeChartLabels: string[] = ["1", "2", "3"];
+
+  responseTime: number = 0;
+
+  previousMachineChart;
+  previousCSPRChart;
+  previousAverageTimeChart;
+
   numberOfPages: number;
   loading: boolean = false;
   searchParams: string[] = [];
@@ -46,12 +72,19 @@ export class LogComponent implements OnInit, AfterViewInit {
     this.searchParams['end_date'] = endDate;
     this.searchParams['state_code'] = stateCode;
     this.loading= true;
+    let initTime = new Date();
     this.logService.getLogs(startDate, endDate, stateCode)
       .subscribe(results => {
+        let endTime = new Date();
+        this.responseTime = (endTime.getTime() - initTime.getTime()) / 1000;
+        this.responseTimes.push(this.responseTime);
         this.loading = false;
         console.log(results.length)
         this.numberOfPages = results.length;
         this.logItems = results;
+        this.updateRequestPerMachineData();
+        this.updateRequestsPerComplianceStatusGraph();
+        this.updateAverageTimeGraph();
       })
   }
 
@@ -89,5 +122,147 @@ export class LogComponent implements OnInit, AfterViewInit {
     const dateString = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
     return dateString;
   }
+
+  updateRequestPerMachineData(): void{
+
+    let requestPerMachineData = [];
+    for(let log of this.logItems){
+      let machine = log['cd_machine'];
+      if(requestPerMachineData[machine] != null){
+        requestPerMachineData[machine] = requestPerMachineData[machine] + 1;
+        console.log(machine+" COUNT: "+requestPerMachineData[machine]);
+      }
+
+      if (requestPerMachineData[machine] == null)
+        requestPerMachineData[machine] = 1;
+    }
+    const machineNames = Object.keys(requestPerMachineData);
+    let index = 0;
+    let data = [];
+    let labels = [];
+    for(let machineName of machineNames){
+      data[index] = requestPerMachineData[machineName];
+      labels[index] = machineName;
+      //console.log(index +" : "+machineName)
+      index++;
+    }
+    this.requestPerMachineData = [0]['data'] = data;
+    //console.log(labels);
+    this.requestPerMachineLabels = [];
+    this.requestPerMachineLabels = labels;
+    if (this.previousMachineChart)
+      this.previousMachineChart.destroy();
+    var ctx = document.getElementById("machines-chart");
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Machines',
+          data: data,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+    });
+    this.previousMachineChart = myChart;
+  }
+
+  updateAverageTimeGraph(): void{
+    let labels = [];
+    let index = 0;
+    for(let time of this.responseTimes){
+      labels[index] = index;
+      index++;
+    }
+    if (this.previousAverageTimeChart)
+      this.previousAverageTimeChart.destroy();
+    var ctx = document.getElementById("time-chart");
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Average time per day',
+          data: this.responseTimes,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+    });
+
+    this.previousAverageTimeChart = myChart;
+  }
+
+  updateRequestsPerComplianceStatusGraph(): void{
+    let requestPerComplianceStatusData = [];
+    for(let log of this.logItems){
+      let complianceStatus = log['ds_compl_status_returned'];
+      if(requestPerComplianceStatusData[complianceStatus] != null){
+        requestPerComplianceStatusData[complianceStatus] = requestPerComplianceStatusData[complianceStatus] + 1;
+      }
+
+      if (requestPerComplianceStatusData[complianceStatus] == null)
+        requestPerComplianceStatusData[complianceStatus] = 1;
+    }
+    const complianceStatus = Object.keys(requestPerComplianceStatusData);
+    let index = 0;
+    let data = [];
+    let labels = [];
+    for(let machineName of complianceStatus){
+      data[index] = requestPerComplianceStatusData[machineName];
+      labels[index] = machineName;
+      //console.log(index +" : " + machineName)
+      index++;
+    }
+
+    this.requestPerComplianceStatusData = [0]['data'] = data;
+    //console.log(labels);
+    this.requestPerComplianceStatusData = [];
+    this.requestPerComplianceStatusLabels = labels;
+    if (this.previousCSPRChart)
+      this.previousCSPRChart.destroy();
+    var ctx = document.getElementById("rpcs-chart");
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'RPCS',
+          data: data,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+    });
+
+    this.previousCSPRChart = myChart;
+  }
+
+
 
 }

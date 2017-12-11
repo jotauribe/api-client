@@ -10,7 +10,7 @@
 </app-filter-form>
 
 <!-- PAGINATION -->
-<pagination-template class="ui mini borderless pagination menu"
+<pagination-template style="margin-left: -14px" class="ui mini borderless pagination menu"
                      [id]="config.id"
                      #p="paginationApi"
                      (pageChange)="config.currentPage = $event">
@@ -35,11 +35,34 @@
 </pagination-template>
 
 <!-- CONTENT -->
-<div class="ui segment">
-  <div class="ui five cards">
-    <app-log-item *ngFor="let logItem of logItems
+<div class="ui sixteen column grid">
+  <div class="ui row">
+    <div class="ui twelve wide column segment">
+      <div class="ui four cards">
+        <app-log-item *ngFor="let logItem of logItems
                           | paginate: config"
-                  [logItem]="logItem">
-    </app-log-item>
+                      [logItem]="logItem">
+        </app-log-item>
+      </div>
+    </div>
+    <div class="ui four wide column">
+      <!-- GRAPHS -->
+      <div class="ui centered grid">
+        <div class="column" style="align-items: center">
+          <div class="ui  statistic card">
+            <div class="value" style="align-items: center">
+              {{responseTime}}
+            </div>
+            <div class="label">
+              Seconds
+            </div>
+          </div>
+        </div>
+      </div>
+      <canvas class="ui card" id="time-chart" width="100" height="100"></canvas>
+      <canvas class="ui card" id="machines-chart" width="100" height="100"></canvas>
+      <canvas class="ui card" id="rpcs-chart" width="100" height="100"></canvas>
+    </div>
+
   </div>
 </div>

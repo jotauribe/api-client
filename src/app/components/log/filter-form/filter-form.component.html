@@ -22,11 +22,11 @@
           Order by:
         </div>
         <div id="order" class="ui compact selection dropdown" (change)="pickOrderCriteria($event.target.value)">
-          <input name="STATE" type="hidden">
+          <input name="ORDER" type="hidden">
           <div class="default text">Order by</div>
           <i class="dropdown icon"></i>
           <div class="menu">
-            <div class="item" data-value="">SLD</div>
+            <div class="item" data-value="SLD">SLD</div>
             <div class="item" data-value="pro_cde">PRO CODE</div>
             <div class="item" data-value="cd_profession">PROFESSION</div>
             <div class="item" data-value="id_license">LICENSE ID</div>
@@ -48,7 +48,6 @@
         <div class="default text">Filter by state</div>
         <i class="dropdown icon"></i>
         <div class="menu">
-          <div class="item" data-value="">FL</div>
           <div class="item" data-value="FL">FL</div>
           <div class="item" data-value="GA">GA</div>
           <div class="item" data-value="OH">OH</div>

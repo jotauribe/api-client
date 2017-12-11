@@ -10,3 +10,11 @@ app-filter-form {
   padding-bottom: 12px;
 
 }
+
+.ui .card .chartjs-render-monitor{
+  margin-top: 0;
+}
+
+#machines-chart{
+  margin-top: 0 !important;
+}

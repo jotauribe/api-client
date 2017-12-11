@@ -13,6 +13,8 @@ import { FilterFormComponent } from './components/log/filter-form/filter-form.co
 import { DropdownDirective } from './directives/dropdown.directive';
 import { CalendarDirective } from './directives/calendar.directive';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import {ChartsModule} from "ng2-charts";
+import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +24,15 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     FilterFormComponent,
     DropdownDirective,
     CalendarDirective,
-    CalendarComponent
+    CalendarComponent,
+    BarGraphComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     LoadingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ChartsModule
 
 
   ],
