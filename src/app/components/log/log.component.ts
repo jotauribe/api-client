@@ -27,7 +27,7 @@ export class LogComponent implements OnInit, AfterViewInit {
 
   constructor(private logService: LogService) {
     const date = new Date()
-    const actualDateString = (date.getMonth()-1)+"/"+5+"/"+date.getFullYear();
+    const actualDateString = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
     this.searchParams['start_date'] = actualDateString;
     this.searchParams['end_date'] = actualDateString;
     this.searchParams['state_code'] = "FL";
