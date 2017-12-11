@@ -1,3 +1,11 @@
 .column div{
   vertical-align: bottom;
 }
+
+#order{
+  width: 150px !important;
+}
+
+#order-label, #order-column{
+  vertical-align: top;
+}

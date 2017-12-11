@@ -10,29 +10,34 @@
     </div>
     <div class="column">
       <div class="ui labeled input">
-        <div class="ui label">
+        <div class="ui label" id="order-label">
           To:
         </div>
         <calendar (change)="pickEndDate($event)" id="endtDatePicker"></calendar>
       </div>
     </div>
-    <div class="column">
-      <div id="order" class="ui selection dropdown" (change)="pickOrderCriteria($event.target.value)">
-        <input name="STATE" type="hidden">
-        <div class="default text">Order by</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          <div class="item" data-value="">SLD</div>
-          <div class="item" data-value="pro_cde">PRO CODE</div>
-          <div class="item" data-value="cd_profession">PROFESSION</div>
-          <div class="item" data-value="id_license">LICENSE ID</div>
-          <div class="item" data-value="dt_end">CED</div>
-          <div class="item" data-value="ds_compl_status_returned">STATUS</div>
-          <div class="item" data-value="id_client_nbr">CLIENT ID</div>
-          <div class="item" data-value="dt_Start_Log">SLD</div>
-          <div class="item" data-value="dt_end_log">ELD</div>
-          <div class="item" data-value="cd_environment">ENVIRONMENT</div>
-          <div class="item" data-value="cd_machine">MACHINE</div>
+    <div id="order-column" class="column">
+      <div class="ui labeled input">
+        <div class="ui label">
+          Order by:
+        </div>
+        <div id="order" class="ui compact selection dropdown" (change)="pickOrderCriteria($event.target.value)">
+          <input name="STATE" type="hidden">
+          <div class="default text">Order by</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" data-value="">SLD</div>
+            <div class="item" data-value="pro_cde">PRO CODE</div>
+            <div class="item" data-value="cd_profession">PROFESSION</div>
+            <div class="item" data-value="id_license">LICENSE ID</div>
+            <div class="item" data-value="dt_end">CED</div>
+            <div class="item" data-value="ds_compl_status_returned">STATUS</div>
+            <div class="item" data-value="id_client_nbr">CLIENT ID</div>
+            <div class="item" data-value="dt_Start_Log">SLD</div>
+            <div class="item" data-value="dt_end_log">ELD</div>
+            <div class="item" data-value="cd_environment">ENVIRONMENT</div>
+            <div class="item" data-value="cd_machine">MACHINE</div>
+          </div>
         </div>
       </div>
     </div>
